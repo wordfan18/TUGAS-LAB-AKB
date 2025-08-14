@@ -1,34 +1,64 @@
-import { Stack } from "expo-router";
-import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { Ionicons } from '@expo/vector-icons';
+import { Tabs } from 'expo-router';
 
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    // Fonts 
-    "bitcount-double": require("../assets/fonts/BitcountPropDouble_Cursive-Bold.ttf"),
-    "bitcount-single": require("../assets/fonts/BitcountPropSingle-VariableFont_CRSV,ELSH,ELXP,slnt,wght.ttf"),
-    "bungee": require("../assets/fonts/Bungee-Regular.ttf"),
-    "exo2-bolditalic": require("../assets/fonts/Exo2-BoldItalic.ttf"),
-    "intertight-bolditalic": require("../assets/fonts/InterTight-BoldItalic.ttf"),
-    "opensans-italic": require("../assets/fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf"),
-    "oswald-variable": require("../assets/fonts/Oswald-VariableFont_wght.ttf"),
-    "outfit-medium": require("../assets/fonts/Outfit-Medium.ttf"),
-    "playfair-italic": require("../assets/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf"),
-    "robotocondensed-italic": require("../assets/fonts/RobotoCondensed-Italic-VariableFont_wght.ttf"),
-  });
-
-  useEffect(() => {
-    if (loaded && !error) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded, error]);
-
-  if (!loaded && !error) {
-    return null;
-  }
-
-  return <Stack />;
-}
+export default function TabLayout() {
+  return (
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: '#2196F3',
+        tabBarInactiveTintColor: '#666',
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '600',
+        },
+        tabBarStyle: {
+          backgroundColor: '#fff',
+          borderTopWidth: 1,
+          borderTopColor: '#e0e0e0',
+          height: 60,
+          paddingBottom: 8,
+          paddingTop: 8,
+        },
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="about"
+        options={{
+          title: 'About',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="information-circle" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" size={size} color={color} />
+          ),
+        }}
+      />
+      {/* <Tabs.Screen
+        name="user/[id]"
+        options={{
+          title: 'User Detail',
+          // href: null,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-circle" size={size} color={color} 
+            />
+          ),
+        }}
+      /> */}
+    </Tabs>
+  );
+};
